@@ -15,11 +15,11 @@ export default function TextEditor() {
     [{font: []}],
     [{list: "ordered"}, {list: "bullet"}],
     ["bold", "italic", "underline"],
-    [{color: ["red", "yellow"]}, {background: []}],
+    [{color: []}, {background: []}],
     [{script: "sub"}, {script: "super"}],
     [{align: []}],
     ["image", "blockquote", "code-block"],
-    ["clean"],
+    ["clear"],
   ]
   // make change for first mount and conecting to server and adding it to socket and clean up
   useEffect(() => {
@@ -44,7 +44,7 @@ export default function TextEditor() {
     // disable quil when the id is diffrent
     q.disable()
     q.setText("Loading...")
-    // adding q to quill state
+    // adding to q quill state
     setQuill(q)
   }, [])
   useEffect(() => {
@@ -88,17 +88,16 @@ export default function TextEditor() {
       quill.enable()
     })
     // socket emit to get_docuemtn id to make changes to server based on documentId
-    socket.emit("get-document", documentID)
+    socket.emit("document-id", documentID)
   }, [socket, quill, documentID])
   // return div container and all the editor content.
-
   // useEffect to save the quill changes to database
   useEffect(() => {
-    if (socket == null || quill == null) return
+    if (quill == null || socket == null) return
     const interval = setInterval(() => {
       socket.emit("save-document", quill.getContents())
     }, 2000)
-    return ()=> clearInterval(interval  )
+    return () => clearInterval(interval)
   }, [quill, socket])
   return <div className="container" ref={wrapperRef}></div>
 }

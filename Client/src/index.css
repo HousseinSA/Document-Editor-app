@@ -19,6 +19,7 @@ body {
   border: none;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 .container .ql-toolbar {
   position: sticky;
