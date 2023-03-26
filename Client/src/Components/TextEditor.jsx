@@ -10,17 +10,7 @@ export default function TextEditor() {
   // getting the params id
   const {id: documentID} = useParams()
   // adding more option to quill toolbar
-  const toolbar_options = [
-    [{header: [1, 2, 3, 4, 5, 6, false]}],
-    [{font: []}],
-    [{list: "ordered"}, {list: "bullet"}],
-    ["bold", "italic", "underline"],
-    [{color: []}, {background: []}],
-    [{script: "sub"}, {script: "super"}],
-    [{align: []}],
-    ["image", "blockquote", "code-block"],
-    ["clear"],
-  ]
+
   // make change for first mount and conecting to server and adding it to socket and clean up
   useEffect(() => {
     const s = io("http://localhost:3001")
@@ -29,6 +19,17 @@ export default function TextEditor() {
   }, [])
   // callback hook to add the editor to container div
   const wrapperRef = useCallback((wrapper) => {
+    const toolbar_options = [
+      [{header: [1, 2, 3, 4, 5, 6, false]}],
+      [{font: []}],
+      [{list: "ordered"}, {list: "bullet"}],
+      ["bold", "italic", "underline","strike"],
+      [{color: []}, {background: []}],
+      [{indent: "-1"}, {indent: "+1"}][({script: "sub"}, {script: "super"})],
+      [{align: []}],
+      ["image", "blockquote", "code-block", "link", "video"],
+      ["clean"],
+    ]
     if (wrapper == null) return
     // emty string in start
     wrapper.innerHTML = ""
@@ -84,7 +85,6 @@ export default function TextEditor() {
     // onetime eventListner to load-document then change quill content to the document
     socket.once("load-document", (document) => {
       quill.setContents(document)
-      // and enabling quill
       quill.enable()
     })
     // socket emit to get_docuemtn id to make changes to server based on documentId
@@ -96,7 +96,7 @@ export default function TextEditor() {
     if (quill == null || socket == null) return
     const interval = setInterval(() => {
       socket.emit("save-document", quill.getContents())
-    }, 2000)
+    }, 1000)
     return () => clearInterval(interval)
   }, [quill, socket])
   return <div className="container" ref={wrapperRef}></div>

@@ -1,6 +1,19 @@
 const mongoose = require("mongoose")
 const Document = require("./Document")
-mongoose.connect("mongodb://127.0.0.1:27017/google-docs")
+const dotenv = require("dotenv")
+dotenv.config()
+mongoose
+  .connect(process.env.I_LOVE, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Connected to MongoDB")
+  })
+  .catch((err) => {
+    console.error("Error connecting to MongoDB", err)
+  })
+console.log(process.env.I_LOVE)
 const io = require("socket.io")(3001, {
   // require the socket.io and giving them 3001 port
   cors: {
