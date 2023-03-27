@@ -1,9 +1,5 @@
 {
-  "homepage":"https:HousseinSA.github.io/Document-Editor-app",
-  "scripts":{
-    "predeploy":"npm run build",
-  "deploy":"gh-pages -d build"
-  },
+  "home":"https://housseinsa.github.io/Document-App",
   "name": "Documents App",
   "version": "0.1.0",
   "private": true,
