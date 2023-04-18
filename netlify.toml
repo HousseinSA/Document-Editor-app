@@ -2,5 +2,4 @@
 command = "npm run build"
 functions ="functions/"
 [dev]
-path= "/Server"
-commad = "npm run nodemon"
+commad = "npm run start:dev"

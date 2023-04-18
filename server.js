@@ -1,10 +1,10 @@
-const mongoose = require("../node_modules/mongoose")
+const mongoose = require("mongoose")
 const Document = require("./Document")
-const dotenv = require("../node_modules/dotenv")
+const dotenv = require("dotenv")
 dotenv.config()
 mongoose
   .connect(process.env.URI)
-const io = require("../node_modules/socket.io")(3001, {
+const io = require("socket.io")(3001, {
   // require the socket.io and giving them 3001 port
   cors: {
     // cors object that have origin and methods property
