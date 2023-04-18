@@ -1,20 +1,10 @@
-const mongoose =require("mongoose")
+const mongoose = require("../node_modules/mongoose")
 const Document = require("./Document")
-const dotenv = require("dotenv")
+const dotenv = require("../node_modules/dotenv")
 dotenv.config()
 mongoose
-  .connect(process.env.I_LOVE, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log("Connected to MongoDB")
-  })
-  .catch((err) => {
-    console.error("Error connecting to MongoDB", err)
-  })
-console.log(process.env.I_LOVE)
-const io = require("socket.io")(3001, {
+  .connect(process.env.URI)
+const io = require("../node_modules/socket.io")(3001, {
   // require the socket.io and giving them 3001 port
   cors: {
     // cors object that have origin and methods property

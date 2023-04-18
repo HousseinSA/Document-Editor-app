@@ -15,7 +15,7 @@ export default function App() {
             // when the home route load then element is navigated to random documentId
             element={<Navigate to={`/documents/${uuidv4()}`} />}
           />
-{/* random document Id */}
+          {/* random document Id */}
           <Route path="/documents/:id" element={<TextEditor />} />
         </Routes>
       </BrowserRouter>

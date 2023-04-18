@@ -10,7 +10,6 @@ export default function TextEditor() {
   // getting the params id
   const {id: documentID} = useParams()
   // adding more option to quill toolbar
-
   // make change for first mount and conecting to server and adding it to socket and clean up
   useEffect(() => {
     const s = io("http://localhost:3001")
@@ -23,7 +22,7 @@ export default function TextEditor() {
       [{header: [1, 2, 3, 4, 5, 6, false]}],
       [{font: []}],
       [{list: "ordered"}, {list: "bullet"}],
-      ["bold", "italic", "underline","strike"],
+      ["bold", "italic", "underline", "strike"],
       [{color: []}, {background: []}],
       [{indent: "-1"}, {indent: "+1"}][({script: "sub"}, {script: "super"})],
       [{align: []}],
@@ -61,7 +60,7 @@ export default function TextEditor() {
     // quill event listner if the text change then call the handler function
     quill.on("text-change", handler)
     return () => {
-      // cleaning up the quill eventListner
+      // cleaning up the quill eventListener
       quill.off("text-change", handler)
     }
   }, [socket, quill])
