@@ -1,2 +1,6 @@
 [dev]
 commad = "npm run start:dev"
+[[redirects]]
+from ="/*"
+to="/index.html"
+status = 200 
