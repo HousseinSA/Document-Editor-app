@@ -12,7 +12,7 @@ export default function TextEditor() {
   // adding more option to quill toolbar
   // make change for first mount and conecting to server and adding it to socket and clean up
   useEffect(() => {
-    const s = io("http://localhost:3001")
+    const s = io("https://docs-editor-backend.onrender.com")
     setSocket(s)
     return () => s.disconnect()
   }, [])
